@@ -1,0 +1,139 @@
+<html>
+<header>
+  <title>AngularJS in action documentation</title>
+  <script src="js/angular.min.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <script src="app/index.js"></script>
+</header>
+<body ng-app="basicApp" ng-controller="mainController">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <!-- Sections goes here -->
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h2>ng-click</h2></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 col-md-offset-1">
+                  <div><br>
+                    <input type="button" class="btn btn-danger" value="Click ME" ng-click="showAlert('ng-click')"/>
+                    gets triggered when the mouse clicks the object.
+                  </br>&nbsp;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h2>ng-change</h2></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 col-md-offset-1">
+                  <div><br>
+                    <select class="form-control" ng-model="valueToStore" ng-change="showAlert('ng-change')">
+                      <option value=1>1</option>
+                      <option value=2>2</option>
+                      <option value=3>3</option>
+                      <option value=4>4</option>
+                    </select>
+                  gets triggered when object is changed (dropdown, textbox etc).
+                </br>&nbsp;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h2>ng-focus / ng-blur</h2></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-1">
+                <div><br>
+                  {{focusObj.dropdown}}
+                  <select class="form-control" ng-focus="markFocused('dropdown')" ng-blur="unmarkFocused('dropdown')">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                  </select>
+                  gets triggered when object gets focus (with tab key or mouse click).
+                </br>{{focusObj.input}}<input type="text" class="form-control" ng-focus="markFocused('input')"/ ng-blur="unmarkFocused('input')">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h2>ng-copy</h2></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-1">
+                <div><br>
+                  gets triggered when the user tries to copy (CTRL-C).
+                </br><input type="text" class="form-control" ng-copy="showAlert('NG-COPY')" value="Try to copy this">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h2>ng-cut</h2></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-1">
+                <div><br>
+                  gets triggered when the user tries to copy (CTRL-X).
+                </br><input type="text" class="form-control" ng-cut="showAlert('NG-CUT')" value="Try to cut this">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h2>ng-paste</h2></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-1">
+                <div><br>
+                  gets triggered when the user tries to paste (CTRL-V).
+                </br><input type="text" class="form-control" ng-paste="showAlert('NG-PASTE')" value="Try to paste in here">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h2>ng-dblclick</h2></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 col-md-offset-1">
+                  <div><br>
+                    <input type="button" class="btn btn-danger" value="DOUBLE Click ME" ng-dblclick="showAlert('ng-dblclick')"/>
+                    gets triggered when the mouse clicks the object.
+                  </br>&nbsp;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+    <script>
+    app.controller("mainController", function($scope) {
+      $scope.user = {
+        name: "Carl Top",
+        surname: "Last"
+      };
+      $scope.focusObj = {
+        dropdown: "Not focused",
+        input: "Not focused"
+      };
+      $scope.markFocused = function(obj) {
+        $scope.focusObj[obj] = " object focused";
+      };
+      $scope.unmarkFocused = function(obj) {
+        $scope.focusObj[obj] = "Not focused";
+      };
+      $scope.showAlert = function(origin) {
+        alert("This alert was triggered by " + origin);
+      };
+    });
+  </script>
+</body>
+</html>
